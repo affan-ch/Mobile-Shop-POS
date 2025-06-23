@@ -3,6 +3,8 @@
 A **Laravel-based web portal** for managing mobile phone sales, supporting multiple user roles: **cashiers**, **admins**, and **super admins**.
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/affan-ch/Mobile-Shop-POS)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/affan-ch/Mobile-Shop-POS)
+
 
 ## 🚀 Features
 
