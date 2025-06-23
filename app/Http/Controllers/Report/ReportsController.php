@@ -18,7 +18,7 @@ class ReportsController extends Controller
         if (Auth::guard('admin')->check()) {
             $user = Auth::guard('admin')->user();
         } else {
-            $user= Auth::guard('superadmin')->user();
+            $user = Auth::guard('superadmin')->user();
         }
         $rec = $user;
 
@@ -43,43 +43,108 @@ class ReportsController extends Controller
         $endDate = $request->input('end_date');
         $shopId = $request->input('shop_id');
 
-
         switch ($reportType) {
             case 'sales':
-                $data = Sale::whereBetween('sale_date', [$startDate, $endDate])
+                $data = Sale::with(['product', 'shop', 'invoice'])
+                    ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
+                        return $query->whereBetween('sale_date', [$startDate, $endDate]);
+                    })
                     ->when($shopId, function ($query) use ($shopId) {
                         return $query->where('shop_id', $shopId);
                     })
-                    ->get();
+                    ->get()
+                    ->map(function ($sale) {
+                        return [
+                            'Product Name' => $sale->product->name,
+                            'Shop Name' => $sale->shop->name,
+                            'Sale Date' => $sale->sale_date,
+                            'Sale Price' => $sale->sale_price,
+                            'Quantity' => $sale->quantity,
+                            'Total Price' => $sale->total_price,
+                            'Invoice ID' => $sale->invoice->id,
+                        ];
+                    });
                 break;
 
             case 'warranty':
-                $data = Claim::whereBetween('created_at', [$startDate, $endDate])
+                $data = Claim::with(['product', 'shop', 'invoice'])
+                    ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
+                        return $query->whereBetween('created_at', [$startDate, $endDate]);
+                    })
                     ->when($shopId, function ($query) use ($shopId) {
                         return $query->where('shop_id', $shopId);
                     })
-                    ->get();
+                    ->get()
+                    ->map(function ($claim) {
+                        return [
+                            'Product Name' => $claim->product->name,
+                            'Shop Name' => $claim->shop->name,
+                            'Quantity' => $claim->quantity,
+                            'Claim Date' => $claim->created_at,
+                            'Invoice ID' => $claim->invoice->id,
+                        ];
+                    });
                 break;
 
             case 'inventory':
-                $data = Product::where('shop_id', $shopId)->get();
+                $data = Product::with('shop')
+                    ->when($shopId, function ($query) use ($shopId) {
+                        return $query->where('shop_id', $shopId);
+                    })
+                    ->get()
+                    ->map(function ($product) {
+                        return [
+                            'Product Name' => $product->name,
+                            'Shop Name' => $product->shop->name,
+                            'Price' => $product->price,
+                            'Stock Quantity' => $product->qty,
+                            'Sold Quantity' => $product->sold_qty,
+                            'Warranty' => $product->warranty_duration . ' ' . ($product->warranty_unit ? 'months' : 'years'),
+                        ];
+                    });
                 break;
 
             case 'revenue':
-                $data = Invoice::whereBetween('created_at', [$startDate, $endDate])
+                $data = Invoice::with('shop')
+                    ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
+                        return $query->whereBetween('created_at', [$startDate, $endDate]);
+                    })
                     ->when($shopId, function ($query) use ($shopId) {
                         return $query->where('shop_id', $shopId);
                     })
-                    ->get();
+                    ->get()
+                    ->map(function ($invoice) {
+                        return [
+                            'Invoice ID' => $invoice->id,
+                            'Shop Name' => $invoice->shop->name,
+                            'Total Bill' => $invoice->total_bill,
+                            'Final Bill' => $invoice->final_bill,
+                            'Customer Name' => $invoice->customer_name,
+                            'Customer Phone' => $invoice->customer_phone,
+                            'Invoice Date' => $invoice->created_at,
+                        ];
+                    });
                 break;
 
             case 'discounts':
-                $data = Invoice::whereBetween('created_at', [$startDate, $endDate])
+                $data = Invoice::with('shop')
+                    ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
+                        return $query->whereBetween('created_at', [$startDate, $endDate]);
+                    })
                     ->when($shopId, function ($query) use ($shopId) {
                         return $query->where('shop_id', $shopId);
                     })
-                    ->select('id', 'shop_id', 'total_bill', 'discount', 'final_bill', 'created_at')
-                    ->get();
+                    ->get()
+                    ->map(function ($invoice) {
+                        return [
+                            'Invoice ID' => $invoice->id,
+                            'Shop Name' => $invoice->shop->name,
+                            'Total Bill' => $invoice->total_bill,
+                            'Discount Applied' => $invoice->discount,
+                            'Final Bill' => $invoice->final_bill,
+                            'Invoice Date' => $invoice->created_at,
+                        ];
+                    });
                 break;
 
             default:
@@ -88,4 +153,7 @@ class ReportsController extends Controller
 
         return response()->json(['data' => $data]);
     }
+
+
+
 }

@@ -8,7 +8,6 @@ use App\Models\User;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\ShopAdmin;
 
@@ -61,7 +60,7 @@ class ShopController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => $request->password,
         ]);
 
         // Redirect back with a success message
@@ -141,7 +140,7 @@ class ShopController extends Controller
         $admin = User::find($id);
 
         // Update the password
-        $admin->password = Hash::make($request->new_password);
+        $admin->password = $request->new_password;
         $admin->save();
 
         // Redirect back with a success message

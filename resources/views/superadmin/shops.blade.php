@@ -151,6 +151,7 @@
                                                 <th class="min-w-100px">#</th>
                                                 <th class="min-w-100px">Name</th>
                                                 <th class="min-w-100px">Email</th>
+                                                <th class="min-w-100px">Password</th>
                                                 <th class="min-w-100px">Status</th>
                                                 <th class="min-w-100px">Admin Status</th>
                                                 <th class="min-w-100px pe-5">Actions</th>
@@ -174,6 +175,10 @@
                                                     <td>
                                                         <a href="#"
                                                             class="text-dark text-hover-primary">{{ $admin->email }}</a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#"
+                                                            class="text-dark text-hover-primary">{{ $admin->password }}</a>
                                                     </td>
                                                     <td>
                                                         <a href="#" class="text-dark text-hover-primary">

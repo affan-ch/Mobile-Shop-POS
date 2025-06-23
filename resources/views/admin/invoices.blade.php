@@ -76,6 +76,51 @@
         <div class="row">
             <!-- Invoice List Container -->
             <div class="col-md-12">
+                <div class="card-body mt-n10">
+                    <div class="row">
+                        <div class="col-md-3 mt-10">
+                            <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5 ">
+                                <div class="d-flex justify-content-between">
+                                    <div class="symbol symbol-30px me-5 mb-8">
+                                        <span class="symbol-label">
+                                            <span class="fs-2qx fas fa-chart-line text-primary">
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="symbol   me-5 mb-8">
+                                        <span class="text-dark fw-boldest d-block fs-2qx lh-1 mb-1">{{ number_format($totalSalesThisMonth, 2) }} <span class="fs-6">AED</span></span>
+                                    </div>
+                                </div>
+                                <div class=" mt-10">
+                                    <span class="text-gray-700 fw-bold fs-2">Total Sales this Month</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-3 mt-10">
+                            <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5 ">
+                                <div class="d-flex justify-content-between">
+                                    <div class="symbol symbol-30px me-5 mb-8">
+                                        <span class="symbol-label">
+                                            <span class="fs-2qx fas fa-dollar-sign text-primary">
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="symbol   me-5 mb-8">
+                                        <span class="text-dark fw-boldest d-block fs-2qx lh-1 mb-1">{{ number_format($totalSalesTillNow, 2) }} <span class="fs-6">AED</span></span>
+                                    </div>
+                                </div>
+                                <div class=" mt-10">
+                                    <span class="text-gray-700 fw-bold fs-2">Total Sales till Now</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
                 <div class="card">
                     <div class="card-header">
                         <h4 class="mt-7">Invoices</h4>

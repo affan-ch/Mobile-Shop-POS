@@ -19,7 +19,16 @@ class InvoiceController extends Controller
                            ->get();
         $shop = User::where('id', $shop_id)->first();
 
-        return view('admin.invoices', ['rec' => $rec, 'shop_id' => $shop_id, 'invoices' => $invoices], ['shop_name' => $shop->name]);
+        // Calculate total sales till now
+        $totalSalesTillNow = Invoice::where('shop_id', $shop_id)->sum('final_bill');
+
+        // Calculate total sales for the current month
+        $totalSalesThisMonth = Invoice::where('shop_id', $shop_id)
+            ->whereYear('created_at', now()->year)
+            ->whereMonth('created_at', now()->month)
+            ->sum('final_bill');
+
+        return view('admin.invoices', ['rec' => $rec, 'shop_id' => $shop_id, 'invoices' => $invoices,'totalSalesTillNow' => $totalSalesTillNow,'totalSalesThisMonth' => $totalSalesThisMonth], ['shop_name' => $shop->name]);
     }
 
     public function getInvoiceDetails($id)
