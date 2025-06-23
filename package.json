@@ -3,6 +3,7 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
+        "serve": "php artisan serve",
         "build": "vite build"
     },
     "devDependencies": {
