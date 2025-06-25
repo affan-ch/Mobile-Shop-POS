@@ -61,37 +61,6 @@
                             </div>
                         </div>
                         <!--end::Menu item-->
-                        <!--begin::Menu separator-->
-                        <div class="separator my-2"></div>
-                        <!--end::Menu separator-->
-                        <!--begin::Menu item-->
-                        <div class="menu-item px-5">
-                            <a href="#" class="menu-link px-5">My Profile</a>
-                        </div>
-                        <!--end::Menu item-->
-
-                        <!--begin::Menu item-->
-                        <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start">
-                            <a href="#" class="menu-link px-5">
-                                <span class="menu-title">Account Setings</span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <!--begin::Menu sub-->
-                            <div class="menu-sub menu-sub-dropdown w-275px py-4">
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-5">Edit Profile</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-5">Change Password</a>
-                                </div>
-                                <!--end::Menu item-->
-                            </div>
-                            <!--end::Menu sub-->
-                        </div>
-                        <!--end::Menu item-->
 
                         <!--begin::Menu separator-->
                         <div class="separator my-2"></div>
@@ -140,11 +109,11 @@
                         </a>
                     </div>
 
-                    <div class="menu-item {{ request()->is('shop/invoices') ? 'here' : '' }}">
+                    {{-- <div class="menu-item {{ request()->is('shop/invoices') ? 'here' : '' }}">
                         <a class="menu-link py-3" href="{{url('/shop/invoices')}}">
                             <span class="menu-title">Invoices</span>
                         </a>
-                    </div>
+                    </div> --}}
 
                     <div class="menu-item {{ request()->is('shop/warranty') ? 'here' : '' }}">
                         <a class="menu-link py-3" href="{{url('/shop/warranty')}}">
@@ -152,11 +121,11 @@
                         </a>
                     </div>
 
-                    <div class="menu-item {{ request()->is('shop/claims') ? 'here' : '' }}">
+                    {{-- <div class="menu-item {{ request()->is('shop/claims') ? 'here' : '' }}">
                         <a class="menu-link py-3" href="{{url('/shop/claims')}}">
                             <span class="menu-title">Claims</span>
                         </a>
-                    </div>
+                    </div> --}}
 
                 </div>
                 <!--end::Menu-->

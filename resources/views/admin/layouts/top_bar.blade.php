@@ -34,11 +34,11 @@
                     <div class="btn btn-icon btn-color-gray-700 btn-active-color-primary btn-outline btn-outline-secondary w-30px h-30px w-lg-40px h-lg-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
                         <!--begin::Svg Icon | path: icons/duotune/communication/com013.svg-->
                         <span class="svg-icon svg-icon-1">
-											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-												<path d="M6.28548 15.0861C7.34369 13.1814 9.35142 12 11.5304 12H12.4696C14.6486 12 16.6563 13.1814 17.7145 15.0861L19.3493 18.0287C20.0899 19.3618 19.1259 21 17.601 21H6.39903C4.87406 21 3.91012 19.3618 4.65071 18.0287L6.28548 15.0861Z" fill="black" />
-												<rect opacity="0.3" x="8" y="3" width="8" height="8" rx="4" fill="black" />
-											</svg>
-										</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M6.28548 15.0861C7.34369 13.1814 9.35142 12 11.5304 12H12.4696C14.6486 12 16.6563 13.1814 17.7145 15.0861L19.3493 18.0287C20.0899 19.3618 19.1259 21 17.601 21H6.39903C4.87406 21 3.91012 19.3618 4.65071 18.0287L6.28548 15.0861Z" fill="black" />
+                                <rect opacity="0.3" x="8" y="3" width="8" height="8" rx="4" fill="black" />
+                            </svg>
+                        </span>
                         <!--end::Svg Icon-->
                     </div>
                     <!--end::User icon-->
@@ -61,38 +61,7 @@
                             </div>
                         </div>
                         <!--end::Menu item-->
-                        <!--begin::Menu separator-->
-                        <div class="separator my-2"></div>
-                        <!--end::Menu separator-->
-                        <!--begin::Menu item-->
-                        <div class="menu-item px-5">
-                            <a href="#" class="menu-link px-5">My Profile</a>
-                        </div>
-                        <!--end::Menu item-->
-
-                        <!--begin::Menu item-->
-                        <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start">
-                            <a href="#" class="menu-link px-5">
-                                <span class="menu-title">Account Setings</span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <!--begin::Menu sub-->
-                            <div class="menu-sub menu-sub-dropdown w-275px py-4">
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-5">Edit Profile</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-5">Change Password</a>
-                                </div>
-                                <!--end::Menu item-->
-                            </div>
-                            <!--end::Menu sub-->
-                        </div>
-                        <!--end::Menu item-->
-
+  
                         <!--begin::Menu separator-->
                         <div class="separator my-2"></div>
                         <!--end::Menu separator-->
@@ -108,8 +77,6 @@
                 </div>
                 <!--end::User -->
 
-                <!--begin::Sidebar Toggler-->
-                <!--end::Sidebar Toggler-->
             </div>
             <!--end::Topbar-->
         </div>
