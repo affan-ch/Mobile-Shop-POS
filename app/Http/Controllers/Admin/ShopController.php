@@ -82,25 +82,16 @@ class ShopController extends Controller
             'password.confirmed' => 'The New Password confirmation does not match.',
         ];
 
-        // Create a validator instance
         $validator = Validator::make($request->all(), $rules, $messages);
-
-        // Check if validation fails
         if ($validator->fails()) {
-            // Redirect back with error messages
             return redirect()->back()->with('error', $validator->errors()->first());
         }
 
-        $id = $request->input('id');
-
-        // Find the admin
-        $admin = User::find($id);
-
-        // Update the password
-        $admin->password =$request->new_password;
+        // 2) Fetch & update
+        $admin = User::findOrFail($request->input('id'));
+        $admin->password = $request->input('password');
         $admin->save();
 
-        // Redirect back with a success message
         return redirect()->back()->with('success', 'Password updated successfully!');
     }
 

@@ -15,14 +15,9 @@ class ShopController extends Controller
 {
     public function index()
     {
-
-
-
         $rec = Auth::guard('superadmin')->user();
         $Shops = User::get()->all();
         $Admins = Admin::get()->all();
-
-
 
         return view('superadmin.shops', ['rec' => $rec, 'shops' => $Shops, 'admins' => $Admins]);
 
