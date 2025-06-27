@@ -312,8 +312,15 @@
                 printDiscount.textContent = discount.toFixed(2);
                 printInvoiceTotal.textContent = (total - discount).toFixed(2);
 
-                const currentDate = new Date();
-                const formattedDate = `${String(currentDate.getDate()).padStart(2, '0')}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${currentDate.getFullYear()}`;
+                const formattedDate = new Date().toLocaleString('en-US', {
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: 'numeric',
+                    hour12: true
+                });
                 printDate.textContent = formattedDate;
 
                 printCustomerName.textContent = document.getElementById('customer_name').value || 'N/A';

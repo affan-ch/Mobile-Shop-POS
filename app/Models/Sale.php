@@ -31,4 +31,11 @@ class Sale extends Model
     {
         return $this->belongsTo(Invoice::class);
     }
+
+    // Relationship with Shop
+    public function shop()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

@@ -109,11 +109,11 @@
                         </a>
                     </div>
 
-                    {{-- <div class="menu-item {{ request()->is('shop/invoices') ? 'here' : '' }}">
+                    <div class="menu-item {{ request()->is('shop/invoices') ? 'here' : '' }}">
                         <a class="menu-link py-3" href="{{url('/shop/invoices')}}">
                             <span class="menu-title">Invoices</span>
                         </a>
-                    </div> --}}
+                    </div>
 
                     <div class="menu-item {{ request()->is('shop/warranty') ? 'here' : '' }}">
                         <a class="menu-link py-3" href="{{url('/shop/warranty')}}">
@@ -121,11 +121,11 @@
                         </a>
                     </div>
 
-                    {{-- <div class="menu-item {{ request()->is('shop/claims') ? 'here' : '' }}">
+                    <div class="menu-item {{ request()->is('shop/claims') ? 'here' : '' }}">
                         <a class="menu-link py-3" href="{{url('/shop/claims')}}">
                             <span class="menu-title">Claims</span>
                         </a>
-                    </div> --}}
+                    </div>
 
                 </div>
                 <!--end::Menu-->

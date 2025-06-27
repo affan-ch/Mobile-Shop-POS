@@ -4,7 +4,7 @@
 <!--begin::Head-->
 <head>
 
-    <title>Dashboard - Lock Screen</title>
+    <title>Shop Login</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="{{asset('admin/assets/media/logos/favicon.ico')}}" />
@@ -15,7 +15,7 @@
     <link href="{{asset('admin/assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('admin/assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
-    <script src="admin/assets/plugins/global/plugins.bundle.js"></script>
+
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -25,7 +25,39 @@
 <div class="d-flex flex-column flex-root">
     <!--begin::Authentication - Sign-in -->
     <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url({{asset('admin/assets/media/illustrations/sketchy-1/14.png')}}">
-        <!--begin::Content-->
+    <nav class="navbar navbar-expand-lg bg-light-primary shadow-sm">
+        <div class="container-fluid">
+
+            <!-- Left: Logo/Icon -->
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <img src="{{ asset('app/assets/img/logo.png') }}" alt="Logo" style="height: 40px;" />
+            </a>
+
+            <!-- Center: Navigation Links -->
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link fw-bold px-5 {{ request()->is('/') ? 'active text-primary' : '' }}"
+                        href="{{ url('/') }}">Shop Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fw-bold px-5 {{ request()->is('admin-panel*') ? 'active text-primary' : '' }}"
+                        href="{{ url('/admin-panel') }}">Admin Panel</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fw-bold px-5 {{ request()->is('super-admin*') ? 'active text-primary' : '' }}"
+                        href="{{ url('/super-admin') }}">Super Admin Panel</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <style>
+        .navbar .nav-link.active {
+            border-bottom: 2px solid var(--bs-primary);
+        }
+    </style>
+    
+    <!--begin::Content-->
         <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
             <!--begin::Logo-->
             {{-- <a href="{{url('/admin')}}" class="mb-12">
@@ -113,7 +145,6 @@
                     <p>&copy; Copyright <script> document.write(new Date().getFullYear()); </script> All rights reserved.</p>
                 </div>
                 <!--end::Copyright-->
-
             </div>
             <!--end::Container-->
         </div>

@@ -154,7 +154,12 @@
                                     <td>{{ $invoice->final_bill }}</td>
                                     <td>{{ $invoice->customer_name ? $invoice->customer_name : 'N/A' }}</td>
                                     <td>{{ $invoice->customer_phone ? $invoice->customer_phone : 'N/A' }}</td>
-                                    <td>{{ $invoice->created_at }}</td>
+                                    <td>@if($invoice->created_at)
+                                            {{ $invoice->created_at->format('F j, Y - g:i A') }}
+                                        @else
+                                            N/A
+                                        @endif
+                                    </td>
                                     <td>
                                         <button class="btn btn-sm btn-info view-details" 
                                                 data-id="{{ $invoice->id }}">
