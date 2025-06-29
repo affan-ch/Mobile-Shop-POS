@@ -13,7 +13,7 @@ use App\Http\Controllers\SuperAdmin\ClaimsController;
 
 
 Route::controller(LoginController::class)->group(function () {
-    Route::get('/', 'index')->name('superadmin.login');
+    Route::get('/', 'index')->name('login');
     Route::get('/login', 'index')->name('superadmin.login');
     Route::get('/logout', 'logout');
     Route::post('/submit_login', 'login_validate');

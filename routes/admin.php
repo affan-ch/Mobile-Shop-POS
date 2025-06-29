@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\ClaimsController;
 
 Route::controller(LoginController::class)->group(function () {
-    Route::get('/', 'index')->name('admin.login');
+    Route::get('/', 'index')->name('login');
     Route::get('/login', 'index')->name('admin.login');
     Route::get('/logout', 'logout');
     Route::post('/submit_login', 'login_validate');
