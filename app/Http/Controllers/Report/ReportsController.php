@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Invoice;
 use App\Models\User;
 use Auth;
+use Carbon\Carbon;
 
 class ReportsController extends Controller
 {
@@ -43,6 +44,11 @@ class ReportsController extends Controller
         $endDate = $request->input('end_date');
         $shopId = $request->input('shop_id');
 
+        if ($startDate && $endDate) {
+            $startDate = Carbon::parse($startDate)->startOfDay(); // e.g., '2024-06-29 00:00:00'
+            $endDate   = Carbon::parse($endDate)->endOfDay();   // e.g., '2024-06-29 23:59:59'
+        }
+
         switch ($reportType) {
             case 'sales':
                 $data = Sale::with(['product', 'shop', 'invoice'])
@@ -57,7 +63,7 @@ class ReportsController extends Controller
                         return [
                             'Product Name' => $sale->product->name,
                             'Shop Name' => $sale->shop->name,
-                            'Sale Date' => $sale->sale_date,
+                            'Sale Date' => $sale->created_at->setTimezone('Asia/Dubai')->format('F j, Y - g:i A'),
                             'Sale Price' => $sale->sale_price,
                             'Quantity' => $sale->quantity,
                             'Total Price' => $sale->total_price,
@@ -80,7 +86,7 @@ class ReportsController extends Controller
                             'Product Name' => $claim->product->name,
                             'Shop Name' => $claim->shop->name,
                             'Quantity' => $claim->quantity,
-                            'Claim Date' => $claim->created_at,
+                            'Claim Date' => $claim->created_at->setTimezone('Asia/Dubai')->format('F j, Y - g:i A'),
                             'Invoice ID' => $claim->invoice->id,
                         ];
                     });
@@ -89,7 +95,7 @@ class ReportsController extends Controller
             case 'inventory':
                 $data = Product::with('shop')
                     ->when($shopId, function ($query) use ($shopId) {
-                        return $query->where('shop_id', $shopId);
+                        return $query->where('shop_id', $shopId)->where('isDeleted', 0);
                     })
                     ->get()
                     ->map(function ($product) {
@@ -121,7 +127,7 @@ class ReportsController extends Controller
                             'Final Bill' => $invoice->final_bill,
                             'Customer Name' => $invoice->customer_name,
                             'Customer Phone' => $invoice->customer_phone,
-                            'Invoice Date' => $invoice->created_at,
+                            'Invoice Date' => $invoice->created_at->setTimezone('Asia/Dubai')->format('F j, Y - g:i A'),
                         ];
                     });
                 break;
@@ -142,7 +148,7 @@ class ReportsController extends Controller
                             'Total Bill' => $invoice->total_bill,
                             'Discount Applied' => $invoice->discount,
                             'Final Bill' => $invoice->final_bill,
-                            'Invoice Date' => $invoice->created_at,
+                            'Invoice Date' => $invoice->created_at->setTimezone('Asia/Dubai')->format('F j, Y - g:i A'),
                         ];
                     });
                 break;

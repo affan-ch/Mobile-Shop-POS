@@ -126,7 +126,7 @@ class InvoiceController extends Controller
 
         $customer_name = $invoice->customer_name;
         $customer_phone = $invoice->customer_phone;
-        $sale_date = $invoice->created_at->format('d-m-Y');
+        $sale_date = $invoice->created_at->setTimezone('Asia/Dubai')->format('F j, Y - g:i A');
     
         $salesWithWarranty = $invoice->sales->map(function ($sale) use ($currentDate) {
             $product = $sale->product;

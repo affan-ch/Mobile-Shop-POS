@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('warranty_duration')->nullable(); // Warranty period
             $table->integer('qty')->default(0);
             $table->integer('sold_qty')->default(0);
+            $table->boolean('isDeleted')->default(0); // Soft delete flag
             $table->timestamps();
 
             // Foreign key constraint

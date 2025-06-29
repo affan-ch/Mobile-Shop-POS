@@ -106,7 +106,7 @@
                             <label class="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
                             <!--end::Label-->
                             <!--begin::Link-->
-                            <a href="#" class="link-primary fs-6 fw-bolder">Forgot Password ?</a>
+                            <!-- <a href="#" class="link-primary fs-6 fw-bolder">Forgot Password ?</a> -->
                             <!--end::Link-->
                         </div>
                         <!--end::Wrapper-->

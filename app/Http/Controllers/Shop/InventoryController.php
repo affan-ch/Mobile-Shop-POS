@@ -14,11 +14,13 @@ class InventoryController extends Controller
     {
         $rec = Auth::guard()->user();
         $shop_id = $rec->id;
-        $products = Product::where('shop_id', $shop_id)->get();
+  
+        // get products that are not deleted
+        $products = Product::where('shop_id', $shop_id)->where('isDeleted', 0)->get();
 
         return view('shop.inventory', ['rec' => $rec, 'products' => $products, 'shop_id' => $shop_id]);
-
     }
+
     public function storeProduct(Request $request)
     {
         // Define validation rules for updating the password
@@ -73,7 +75,7 @@ class InventoryController extends Controller
         $product->save();
 
         $rec = Auth::guard('admin')->user();
-        $products = Product::where('shop_id', $shop_id)->get();
+        $products = Product::where('shop_id', $shop_id)->where('isDeleted', 0)->get();
 
         return redirect()->back()->with('success', 'Product added successfully.');
     }
@@ -112,9 +114,10 @@ class InventoryController extends Controller
                     unlink($imagePath);
                 }
             }
-
-            // Delete the product record
-            $product->delete();
+            
+            // Turn isDeleted to true for soft delete
+            $product->isDeleted = true;
+            $product->save();
 
             // Return a response (you can customize this response as needed)
             return redirect()->back()->with('success', 'Product deleted successfully.');

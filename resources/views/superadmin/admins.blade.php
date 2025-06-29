@@ -114,7 +114,7 @@
                                                 <th class="min-w-100px">#</th>
                                                 <th class="min-w-100px">Name</th>
                                                 <th class="min-w-100px">Email</th>
-                                                <th class="min-w-100px">Status</th>
+                                                <th class="min-w-100px">Access Status</th>
                                                 <th class="min-w-100px pe-5">Actions</th>
                                             </tr>
                                             <!--end::Table row-->
@@ -142,7 +142,7 @@
                                                             @if ($admin->status == 1)
                                                                 Blocked
                                                             @elseif($admin->status == 0)
-                                                                Un Blocked
+                                                                Allowed
                                                             @endif
                                                         </a>
                                                     </td>
@@ -653,7 +653,7 @@
                             <!--begin::Input group for Status-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
-                                <label class="fw-bold fs-6 mb-2">Status</label>
+                                <label class="fw-bold fs-6 mb-2">Block Admin Access</label>
                                 <!--end::Label-->
                                 <!--begin::Input group-->
                                 <div class="form-check form-switch">

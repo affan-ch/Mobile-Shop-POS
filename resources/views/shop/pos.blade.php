@@ -237,6 +237,7 @@
             
             <!-- Show Total, Discount, and Final Total in the correct order -->
             <h3 class="text-end">Total: <span id="print_total">0</span> AED</h3>
+            <h3 class="text-end">Including 5% Tax: <span id="print_tax">0</span> AED</h3>
             <h3 class="text-end">Discount: <span id="print_discount">0</span> AED</h3>
             <h3 class="text-end">Final Total: <span id="print_invoice_total">0</span> AED</h3>
             
@@ -309,6 +310,11 @@
                 });
 
                 printTotal.textContent = total.toFixed(2);
+
+                const taxAmount = total * 0.05;
+                const printTax = document.getElementById('print_tax');
+                printTax.textContent = taxAmount.toFixed(2);
+
                 printDiscount.textContent = discount.toFixed(2);
                 printInvoiceTotal.textContent = (total - discount).toFixed(2);
 

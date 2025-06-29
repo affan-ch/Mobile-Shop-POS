@@ -20,4 +20,10 @@ class Invoice extends Model
     {
         return $this->hasMany(Sale::class);
     }
+
+    // Relationship with Shop
+    public function shop()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

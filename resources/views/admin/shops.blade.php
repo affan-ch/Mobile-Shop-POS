@@ -103,8 +103,8 @@
                                                 <th class="min-w-100px">Name</th>
                                                 <th class="min-w-100px">Email</th>
                                                 <th class="min-w-100px">Password</th>
-                                                <th class="min-w-100px">Status</th>
-                                                <th class="min-w-100px">Admin Status</th>
+                                                <th class="min-w-100px">Access By Super Admin</th>
+                                                <th class="min-w-100px">Access By Admin</th>
                                                 <th class="min-w-100px pe-5">Actions</th>
                                             </tr>
                                             <!--end::Table row-->
@@ -136,7 +136,7 @@
                                                             @if ($admin->status == 1)
                                                                 Blocked
                                                             @elseif($admin->status == 0)
-                                                                Un Blocked
+                                                                Allowed
                                                             @endif
                                                         </a>
                                                     </td>
@@ -145,7 +145,7 @@
                                                             @if ($admin->blocked_by_admin == 1)
                                                                 Blocked
                                                             @elseif($admin->blocked_by_admin == 0)
-                                                                Un Blocked
+                                                                Allowed
                                                             @endif
                                                         </a>
                                                     </td>
@@ -694,7 +694,7 @@
                             <!--begin::Input group for Status-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
-                                <label class="fw-bold fs-6 mb-2">Status</label>
+                                <label class="fw-bold fs-6 mb-2">Block Shop Access</label>
                                 <!--end::Label-->
                                 <!--begin::Input group-->
                                 <div class="form-check form-switch">

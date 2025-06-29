@@ -15,7 +15,7 @@ class InventoryController extends Controller
     public function index($shop_id)
     {
         $rec = Auth::guard('superadmin')->user();
-        $products = Product::where('shop_id', $shop_id)->get();
+        $products = Product::where('shop_id', $shop_id)->where('isDeleted', 0)->get();
 
         return view('superadmin.inventory', ['rec' => $rec, 'products' => $products, 'shop_id' => $shop_id]);
 
@@ -74,7 +74,7 @@ class InventoryController extends Controller
         $product->save();
 
         $rec = Auth::guard('admin')->user();
-        $products = Product::where('shop_id', $shop_id)->get();
+        $products = Product::where('shop_id', $shop_id)->where('isDeleted', 0)->get();
 
         return redirect()->route('inventory.show', ['shop_id' => $shop_id])->with('success', 'Product added successfully.');
     }
@@ -114,8 +114,9 @@ class InventoryController extends Controller
                 }
             }
 
-            // Delete the product record
-            $product->delete();
+            // Turn isDeleted to true for soft delete
+            $product->isDeleted = true;
+            $product->save();
 
             // Return a response (you can customize this response as needed)
             return redirect()->back()->with('success', 'Product deleted successfully.');
