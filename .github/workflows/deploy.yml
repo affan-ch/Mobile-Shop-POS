@@ -30,9 +30,9 @@ jobs:
       run: |
         ssh -i ~/.ssh/id_rsa -p 21098 ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << 'EOF'
         cd ${{ secrets.REMOTE_PATH }}
-        /opt/alt/php82/usr/bin/php artisan migrate --force
-        /opt/alt/php82/usr/bin/php artisan config:cache
-        /opt/alt/php82/usr/bin/php artisan route:cache
-        /opt/alt/php82/usr/bin/php artisan view:cache
+        /opt/alt/php84/usr/bin/php artisan migrate --force
+        /opt/alt/php84/usr/bin/php artisan config:cache
+        /opt/alt/php84/usr/bin/php artisan route:cache
+        /opt/alt/php84/usr/bin/php artisan view:cache
         chmod -R 775 storage bootstrap/cache
         EOF
