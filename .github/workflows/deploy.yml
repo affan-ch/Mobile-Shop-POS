@@ -1,0 +1,38 @@
+name: Deploy Laravel to Namecheap Hosting
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -p 21098 -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+    - name: Deploy with rsync
+      run: |
+        rsync -avz --exclude=".env" --exclude="storage/" --exclude=".git/" \
+          -e "ssh -i ~/.ssh/id_rsa -p 21098" \
+          ./ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:${{ secrets.REMOTE_PATH }}
+
+    - name: Run Laravel Artisan Commands
+      run: |
+        ssh -i ~/.ssh/id_rsa -p 21098 ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << 'EOF'
+        cd ${{ secrets.REMOTE_PATH }}
+        /opt/alt/php82/usr/bin/php artisan migrate --force
+        /opt/alt/php82/usr/bin/php artisan config:cache
+        /opt/alt/php82/usr/bin/php artisan route:cache
+        /opt/alt/php82/usr/bin/php artisan view:cache
+        chmod -R 775 storage bootstrap/cache
+        EOF
