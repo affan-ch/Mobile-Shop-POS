@@ -6,39 +6,70 @@
     <link href="{{ asset('admin/assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet"
         type="text/css" />
     <style>
+        /* Print page setup for 80mm thermal receipt */
+        @page {
+            size: 80mm auto;
+            margin: 0;
+        }
+
         /* Hide elements with the 'no-print' class during printing */
         @media print {
-            .no-print, #kt_header, #kt_footer {
+            .no-print, #kt_header, #kt_footer, #kt_toolbar, #kt_content {
                 display: none !important;
+            }
+
+            html, body {
+                margin: 0 !important;
+                padding: 0 !important;
             }
 
             /* Display the invoice during printing */
             #print_invoice {
-                width: 4in;
-                margin: auto;
+                width: 72mm; /* fit inside 80mm paper */
+                margin: 0;
+                padding: 2mm;
+                box-sizing: border-box;
+                font-family: monospace;
+                font-size: 11px;
+                color: #000;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            #print_invoice .text-center h2,
+            #print_invoice .text-center p {
+                margin: 4px 0;
+                line-height: 1.2;
+                text-align: center;
+            }
+
+            #print_invoice hr {
+                border: 0;
+                border-top: 1px solid #000; /* solid line for thermal clarity */
+                margin: 6px 0;
             }
 
             #print_invoice table {
                 width: 100%;
                 border-collapse: collapse;
                 table-layout: fixed;
+                border: 1px solid #000; /* solid outer border */
             }
 
             #print_invoice th,
             #print_invoice td {
-                border: 1px solid black;
-                padding: 5px;
-                word-wrap: break-word; /* Ensure text wraps to new line instead of truncating */
+                border: 1px solid #000; /* avoid dashed/dotted which can skip */
+                padding: 4px 3px;
+                word-wrap: break-word;
+                font-size: 11px;
             }
 
-            #print_invoice th {
-                text-align: left;
-            }
+            #print_invoice th { text-align: left; }
 
             /* Column widths and alignment */
             #print_invoice th:nth-child(1),
             #print_invoice td:nth-child(1) {
-                width: 40%;
+                width: 45%;
                 text-align: left;
             }
 
@@ -49,19 +80,24 @@
             }
 
             #print_invoice th:nth-child(3),
-            #print_invoice td:nth-child(3),
-            #print_invoice th:nth-child(4),
-            #print_invoice td:nth-child(4) {
-                width: 22.5%;
+            #print_invoice td:nth-child(3) {
+                width: 20%;
                 text-align: right;
             }
+
+            #print_invoice th:nth-child(4),
+            #print_invoice td:nth-child(4) {
+                width: 20%;
+                text-align: right;
+            }
+
+            /* Avoid breaking table rows across pages */
+            #print_invoice tr { page-break-inside: avoid; }
         }
 
         /* Hide the print invoice on screen */
         @media screen {
-            #print_invoice {
-                display: none;
-            }
+            #print_invoice { display: none; }
         }
     </style>
 @endsection
@@ -214,7 +250,7 @@
             <div class="text-center">
                 <h2>{{$shop_name}}</h2>
                 <br>
-                <p>Invoice Id: <span id="print_invoice_id"></p>
+                <p>Invoice Id: <span id="print_invoice_id"></span></p>
                 <p>Date: <span id="print_date"></span></p>
                 <p>Customer Name: <span id="print_customer_name"></span></p>
                 <p>Customer Phone: <span id="print_customer_phone"></span></p>
